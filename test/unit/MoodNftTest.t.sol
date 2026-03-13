@@ -22,4 +22,16 @@ contract MoodNftTest is Test {
         moodNft.mintNft();
         console.log(moodNft.tokenURI(0));
     }
+
+    function testFlipMoodWorks() public {
+        vm.prank(USER);
+        moodNft.mintNft();
+
+        assertEq(uint256(moodNft.getMood(0)), uint256(MoodNft.Mood.HAPPY));
+
+        vm.prank(USER);
+        moodNft.flipMood(0);
+
+        assertEq(uint256(moodNft.getMood(0)), uint256(MoodNft.Mood.SAD));
+    }
 }
